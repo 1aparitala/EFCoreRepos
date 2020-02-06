@@ -24,5 +24,13 @@ namespace WebApp.Controllers
             IEnumerable<Product> data = uow.ProductRepo.GetAll();
             return View(data);
         }
+
+
+        public IActionResult Create()
+        {
+
+            //IEnumerable<Product> data = uow.ProductRepo.GetAll();
+            return View();
+        }
     }
 }
