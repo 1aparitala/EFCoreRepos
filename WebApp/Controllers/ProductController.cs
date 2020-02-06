@@ -14,9 +14,10 @@ namespace WebApp.Controllers
 
         IUnitOfWork uow;
 
-        public ProductController()
+        public ProductController(IUnitOfWork _uow)
         {
-            uow = new UnitOfWork();
+            uow = _uow;
+            //uow = new UnitOfWork();
         }
         public IActionResult Index()
         {
@@ -28,6 +29,18 @@ namespace WebApp.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Categories = uow.CategoryRepo.GetAll();
+            //IEnumerable<Product> data = uow.ProductRepo.GetAll();
+            return View();
+        }[HttpPost]
+        public IActionResult Create(Product model)
+        {
+            if (ModelState.IsValid) {
+                uow.ProductRepo.Add(model);
+                uow.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Categories = uow.CategoryRepo.GetAll();
 
             //IEnumerable<Product> data = uow.ProductRepo.GetAll();
             return View();
