@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EFCore
 {
-    class DatabaseContext:DbContext
+    public class DatabaseContext:DbContext
     {
 
         public DbSet<Category>Categories { get; set; }
