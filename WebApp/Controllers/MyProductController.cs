@@ -74,5 +74,20 @@ namespace WebApp.Controllers
         }
 
 
+        public IActionResult Delete(int id) {
+             //StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                var response = client.DeleteAsync(client.BaseAddress + "/Product/"+id).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return Json(new { status = "Success" });
+                }
+                else { 
+                    return Json(new { status = "Failed" });
+
+                }
+        }
+
+
     }
 }

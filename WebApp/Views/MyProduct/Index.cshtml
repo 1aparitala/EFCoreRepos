@@ -49,11 +49,35 @@
                 @Html.DisplayFor(modelItem => item.CategoryId)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new {@class="btn btn-success" }) |
+                <button type="button" class="btn btn-warning btn-delete" data-id="@item.ProductId">Delete</button>
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
+            </td>*@
         </tr>
 }
     </tbody>
 </table>
+
+@section scripts{ 
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", ".btn-delete", function () {
+                if (confirm("Are you sure?")) {
+                    var id = $(this).attr("data-id");
+                    $.ajax({
+                      //  url: '@Url.Action("Delete","MyProduct")/' + id,
+                        //Using API
+                        url:"https://localhost:44381/api/Product/"+id,
+                        method: 'Delete',
+                        success: function (data) {
+                            if (data ==200) {
+                                window.location.reload();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

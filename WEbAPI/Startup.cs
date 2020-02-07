@@ -26,7 +26,13 @@ namespace WEbAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy("cors", policy =>
+                {
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
         }
@@ -38,11 +44,12 @@ namespace WEbAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+           // app.UseCors("cors");
+            app.UseCors(); //or
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

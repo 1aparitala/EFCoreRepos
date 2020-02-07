@@ -32,7 +32,9 @@ namespace Repository.Implementation
 
         public void DeleteByID(object ID)
         {
-            throw new NotImplementedException();
+            TEntity entity = db.Set<TEntity>().Find(ID);
+            if (entity != null)
+                db.Set<TEntity>().Remove(entity);
         }
 
         public IEnumerable<TEntity> GetAll()

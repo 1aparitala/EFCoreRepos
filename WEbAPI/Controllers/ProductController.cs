@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EFCore;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
 
 namespace WEbAPI.Controllers
 {
+
+    [EnableCors("cors")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -29,7 +32,7 @@ namespace WEbAPI.Controllers
             return uow.ProductRepo.GetByID(id);
         }
 
-        [HttpPost("{id}")]
+        [HttpPost]
         public IActionResult AddProduct([FromBody]Product model)
         {
             try
@@ -72,7 +75,7 @@ namespace WEbAPI.Controllers
             {
                 uow.ProductRepo.DeleteByID(id);
                 uow.SaveChanges();
-                return StatusCode(StatusCodes.Status200OK);
+                return StatusCode(StatusCodes.Status200OK,"200");
             }
             catch (Exception ex)
             {
