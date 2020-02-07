@@ -75,7 +75,7 @@ namespace WEbAPI.Controllers
             {
                 uow.ProductRepo.DeleteByID(id);
                 uow.SaveChanges();
-                return StatusCode(StatusCodes.Status200OK,"200");
+                return  StatusCode(StatusCodes.Status200OK);
             }
             catch (Exception ex)
             {

@@ -70,8 +70,10 @@
                         //Using API
                         url:"https://localhost:44381/api/Product/"+id,
                         method: 'Delete',
-                        success: function (data) {
-                            if (data ==200) {
+                        //success: function (data) {
+                        success: function (data, textStatus, xhr) {
+                            var statuscode = xhr.status;
+                            if (statuscode =="200") {
                                 window.location.reload();
                             }
                         }
