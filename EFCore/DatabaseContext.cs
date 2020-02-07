@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,6 +7,8 @@ using System.Text;
 namespace EFCore
 {
     public class DatabaseContext:DbContext
+ //   public class DatabaseContext : IdentityDbContext<User, Roles, int>
+
     {
 
         public DbSet<Category>Categories { get; set; }
@@ -27,11 +30,45 @@ namespace EFCore
 
 
         }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+
+        //    // Customize the ASP.NET Identity model and override the defaults if needed.
+        //    modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityUserRole<int>>(i =>
+        //    {
+        //        i.HasKey(x => new { x.RoleId, x.UserId });
+        //    });
+        //    modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityUserLogin<int>>(i =>
+        //    {
+        //        i.HasIndex(x => new { x.ProviderKey, x.LoginProvider });
+        //    });
+        //    modelBuilder.Entity<IdentityRoleClaim<int>>(i =>
+        //    {
+        //        i.HasKey(x => x.Id);
+        //    });
+        //    modelBuilder.Entity<Microsoft.AspNetCore.Identity.IdentityUserClaim<int>>(i =>
+        //    {
+        //        i.HasKey(x => x.Id);
+        //    });
+        //    modelBuilder.Entity<IdentityUserToken<int>>(i =>
+        //    {
+        //        i.HasKey(x => x.UserId);
+        //    });
+
+        //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
            optionsBuilder.UseSqlServer(@"Data Source=DOTNET18;Initial Catalog=EFCoreCGI;Integrated Security=True");
             
             //optionsBuilder.UseSqlServer(@"data source=dotnet18\SqlExpress;initial catalog=EFCoreCGI;persist security info=True;");
         }
+
+
+
+
+
+
+
     }
 }

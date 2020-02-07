@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Repository;
 
 using EFCore;
+using WebApp.Filters;
 
 namespace WebApp.Controllers
 {

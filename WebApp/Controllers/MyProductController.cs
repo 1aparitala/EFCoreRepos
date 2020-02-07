@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using EFCore;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using WebApp.Filters;
 
 namespace WebApp.Controllers
 {
@@ -20,6 +21,7 @@ namespace WebApp.Controllers
             client = new HttpClient();
             client.BaseAddress = baseaddress;
         }
+        [CustomAutorizeFilter(Roles ="Admin")]
         public IActionResult Index()
         {
             List<Product> data = new List<Product>();
